@@ -1,4 +1,5 @@
-class Solution {
+//https://leetcode.com/problems/sort-colors/
+class SortColor {
     public void sortColors(int[] nums) {
         int n = nums.length - 1;
         int indexStart = 0;
