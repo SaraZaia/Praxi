@@ -20,7 +20,7 @@ class DeleteOperationForTwoStrings {
         return word1.length() -2*lcs + word2.length();
     }
 
-    //DFS without memorisation
+    //LongestCommon subsequence DFS without Memoization
     public int minDistance(String word1, String word2) {
         
         int lcs = lcs(word1, word2, 0, 0);
@@ -28,7 +28,7 @@ class DeleteOperationForTwoStrings {
         
         return word1.length() -2*lcs + word2.length();
     }
-    //LongestCommon subsequence
+
     public int lcs(String s1, String s2,int indexS1, int indexS2) {
         
         if(indexS1 >= s1.length() || indexS2 >= s2.length()) return 0;
@@ -37,5 +37,29 @@ class DeleteOperationForTwoStrings {
             return 1 + lcs(s1, s2, indexS1 + 1, indexS2+1);
         
         return Math.max(lcs(s1, s2, indexS1 + 1, indexS2), lcs(s1, s2, indexS1 , indexS2+1));
+    }
+    
+    
+    // LongestCommon subsequence + Memoization
+    public int minDistance(String word1, String word2) {
+        
+        Map<String, Integer> memoization = new HashMap<>();
+        
+        int lcs = lcs(word1, word2, 0, 0, memoization);
+        System.out.println(lcs);
+        
+        return word1.length() -2*lcs + word2.length();
+    }
+    
+    public int lcs(String s1, String s2,int indexS1, int indexS2, Map<String, Integer> memoization) {
+        if(memoization.containsKey(indexS1+" - " + indexS2)) return memoization.get(indexS1+" - " + indexS2);
+        
+        if(indexS1 >= s1.length() || indexS2 >= s2.length()) return 0;
+        
+        if(s1.charAt(indexS1) == s2.charAt(indexS2))
+            return 1 + lcs(s1, s2, indexS1 + 1, indexS2+1,memoization);
+        
+        memoization.put(indexS1+" - " + indexS2, Math.max(lcs(s1, s2, indexS1 + 1, indexS2,memoization), lcs(s1, s2, indexS1 , indexS2+1,memoization)));
+        return  memoization.get(indexS1+" - " + indexS2);
     }
 }
