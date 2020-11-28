@@ -1,17 +1,14 @@
 //https://leetcode.com/problems/edit-distance/
 
-class Solution {
+class EditDistance {
     
     Map<String, Integer> memo = new HashMap<>();
+    // Recursion + memoization
     public int minDistanceRec(String word1, String word2) {
-        
-        
         return dp(word1, word2, word1.length()-1, word2.length()-1);
-        
     }
     
     public int dp(String word1, String word2, int pW1, int pW2) {
-        
         if(memo.containsKey(pW1 + " - " + pW2)) return memo.get(pW1 + " - " + pW2);
         
         if(pW2 < 0) return pW1+1;
@@ -31,7 +28,9 @@ class Solution {
         }
     }   
     
-    
+    //--------------------------------------------------------------------------------------------------------------
+    // Edit distance algo Levenshtein 
+    //https://medium.com/@ethannam/understanding-the-levenshtein-distance-equation-for-beginners-c4285a5604f0
     public int minDistance(String word1, String word2) {
         
         int[][] tab = new int[word1.length()+1][word2.length()+1];
@@ -54,48 +53,4 @@ class Solution {
         
         return tab[word1.length()][word2.length()];
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
 }
