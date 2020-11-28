@@ -1,10 +1,9 @@
 //https://leetcode.com/problems/edit-distance/
 
-
-class EditDistance {
+class Solution {
     
     Map<String, Integer> memo = new HashMap<>();
-    public int minDistance(String word1, String word2) {
+    public int minDistanceRec(String word1, String word2) {
         
         
         return dp(word1, word2, word1.length()-1, word2.length()-1);
@@ -31,4 +30,72 @@ class EditDistance {
             return result;
         }
     }   
+    
+    
+    public int minDistance(String word1, String word2) {
+        
+        int[][] tab = new int[word1.length()+1][word2.length()+1];
+        
+        for(int i = 0; i <= word1.length(); i++) {
+            for(int j = 0; j <= word2.length(); j++) {
+                if(i == 0) tab[i][j] = j;
+                if(j == 0) tab[i][j] = i;
+            }
+        }
+        
+        for(int i = 1; i <= word1.length(); i++) {
+            for(int j = 1; j <= word2.length(); j++) {
+                if(word1.charAt(i-1) == word2.charAt(j-1))                 
+                    tab[i][j] = Math.min(tab[i-1][j-1], Math.min(tab[i][j-1] + 1, tab[i-1][j] + 1)); // if equals no replace => no (+1)
+                else 
+                    tab[i][j] = Math.min(tab[i-1][j-1] + 1, Math.min(tab[i][j-1] + 1, tab[i-1][j] + 1) );//Replace, delete, insert
+            }
+        }
+        
+        return tab[word1.length()][word2.length()];
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
 }
