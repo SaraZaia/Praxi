@@ -1,5 +1,8 @@
 //https://leetcode.com/problems/unique-paths/
 
+
+class UniquePaths {
+    
 // Recursion + memoization
 //---------------------------------------------------
     Map<String, Integer> tab = new HashMap<>();
@@ -14,7 +17,6 @@
 
 // Tabulation
 //--------------------------------------------------------------------------------
-    
     public int uniquePathsTabulation(int line, int col) {
         int[][] tab = new int[line][col];
         
